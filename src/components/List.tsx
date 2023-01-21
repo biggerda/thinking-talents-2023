@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { Component } from "react";
 
-function List() {
-  return (
-    <ul>
-        <li>First Item</li>
-        <li>Second Item</li>
-        <li>Third Item</li>
-    </ul>
-  );
+class List extends Component {
+  state = {
+    items: ["Item 1", "Item 2", "Item 3"],
+  };
+
+  render() {
+    return (
+      <ul style={{ textAlign: "left" }}>
+        {this.state.items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    );
+  }
 }
 
 export default List;

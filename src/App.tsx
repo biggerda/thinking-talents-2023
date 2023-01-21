@@ -1,8 +1,9 @@
-import React from 'react'
-import './App.css';
-import logo from './logo.svg';
-import List from './components/List';
-import Navbar from './components/Navbar';
+import React from "react";
+import "./App.css";
+import logo from "./logo.svg";
+import List from "./components/List";
+import Navbar from "./components/Navbar";
+import Example from "./components/Example";
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
         >
           Learn React
         </a>
-        <p>This is only the beginning! I can't wait!</p>
+        <p>This is only the beginning!</p>
       </header>
+      <Example></Example>
       <List></List>
     </div>
   );
