@@ -17,8 +17,14 @@ class Example extends Component {
   render() {
     return (
       <React.Fragment>
-        <span>{this.formattedCount()}</span>
-        <button onClick={this.handleIncrement}>Increment</button>
+        <span className="badge bg-secondary m-2">{this.formattedCount()}</span>
+        <button
+          type="button"
+          className="btn btn-primary btn-sm"
+          onClick={this.handleIncrement}
+        >
+          Increment
+        </button>
       </React.Fragment>
     );
   }
