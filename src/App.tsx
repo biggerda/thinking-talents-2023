@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
 import logo from "./logo.svg";
-import List from "./components/List";
 import Navbar from "./components/Navbar";
 import Example from "./components/Example";
+import Form from "./components/Form";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
         <p>This is only the beginning!</p>
       </header>
       <Example></Example>
-      <List></List>
+      <Form></Form>
     </div>
   );
 }
