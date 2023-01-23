@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import { Skill } from "../entities/Skill";
 import { skillsData } from "../entities/skillsData";
+import "./Form.css";
 
 class Form extends Component {
   state = {
     skills: skillsData,
   };
 
+  countSelectedSkills = () => {
+    return this.state.skills.filter((skill) => skill.checked).length;
+  };
+
   toggleSelectedSkill = (selectedIndex: number) => {
+    if (this.countSelectedSkills() === 10) return;
+
     const newSkillsState = this.state.skills.map((skill, currentIndex) => {
       if (currentIndex === selectedIndex) skill.checked = !skill.checked;
       return skill;
@@ -18,7 +25,18 @@ class Form extends Component {
 
   render() {
     return (
-      <div>
+      <div id="form">
+        <div id="form__selectedSkillsMsg">
+          <div id="form__selectedSkillsMsg__main">
+            You have selected {this.countSelectedSkills()} skills.
+          </div>
+          <div id="form__selectedSkillsMsg__sub">
+            {this.countSelectedSkills() < 4
+              ? "Choose at least 4 thinking talents"
+              : "Please choose 10 talents at most"}
+          </div>
+        </div>
+
         {this.state.skills.map((skill: Skill, index) => (
           <button
             className={

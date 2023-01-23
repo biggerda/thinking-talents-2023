@@ -1,6 +1,6 @@
-import "./Navbar.css";
 import React, { Component } from "react";
 import nwoLogo from "../assets/images/nwo-logo.png";
+import "./Navbar.css";
 
 class Navbar extends Component {
   render() {
