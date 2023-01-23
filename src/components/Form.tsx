@@ -13,9 +13,7 @@ class Form extends Component {
       return skill;
     });
 
-    this.setState({ skills: newSkillsState }, () => {
-      console.log("Skill selected: {}");
-    });
+    this.setState({ skills: newSkillsState });
   };
 
   render() {
