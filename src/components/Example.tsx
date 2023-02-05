@@ -17,6 +17,8 @@ class Example extends Component {
   render() {
     return (
       <React.Fragment>
+        <hr />
+        <h2>Experimental Section</h2>
         <span className="badge bg-secondary m-2">{this.formattedCount()}</span>
         <button
           type="button"

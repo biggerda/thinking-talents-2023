@@ -1,57 +1,103 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Skill } from "../entities/Skill";
 import { skillsData } from "../entities/skillsData";
+import closeButton from "../assets/images/close-icon.png";
+import useOutsideClick from "../hooks/useOutsideClick";
 import "./Form.css";
 
-class Form extends Component {
-  state = {
-    skills: skillsData,
+const Form = (props: any) => {
+  const [skills, setSkills] = useState(skillsData);
+
+  const handleClose = () => {
+    props.handleClose();
   };
 
-  countSelectedSkills = () => {
-    return this.state.skills.filter((skill) => skill.checked).length;
+  const countSelectedSkills = () => {
+    return skills.filter((skill) => skill.checked).length;
   };
 
-  toggleSelectedSkill = (selectedIndex: number) => {
-    if (this.countSelectedSkills() === 10) return;
+  const clearSelectedSkills = () => {
+    const clearedSkillsState = skills.map((skill) => {
+      skill.checked = false;
+      return skill;
+    });
 
-    const newSkillsState = this.state.skills.map((skill, currentIndex) => {
+    setSkills(clearedSkillsState);
+  };
+
+  const toggleSelectedSkill = (selectedIndex: number) => {
+    if (countSelectedSkills() === 10) return;
+
+    const newSkillsState = skills.map((skill, currentIndex) => {
       if (currentIndex === selectedIndex) skill.checked = !skill.checked;
       return skill;
     });
 
-    this.setState({ skills: newSkillsState });
+    setSkills(newSkillsState);
   };
 
-  render() {
-    return (
-      <div id="form">
+  const ref = useOutsideClick(() => {
+    handleClose();
+  });
+
+  return (
+    <div id="form_container">
+      <div id="form" ref={ref}>
+        <img
+          className="exit-form"
+          src={closeButton}
+          alt="Close form"
+          onClick={handleClose}
+        />
+
+        <h3 id="form__title">New Teammate</h3>
+
         <div id="form__selectedSkillsMsg">
           <div id="form__selectedSkillsMsg__main">
-            You have selected {this.countSelectedSkills()} skills.
+            Please look over the following thinking talents and select the top
+            4-10 that you feel represent you the most.
+          </div>
+          <div id="form__selectedSkillsMsg__counter">
+            {countSelectedSkills()}
           </div>
           <div id="form__selectedSkillsMsg__sub">
-            {this.countSelectedSkills() < 4
+            {countSelectedSkills() < 4
               ? "Choose at least 4 thinking talents"
               : "Please choose 10 talents at most"}
           </div>
         </div>
 
-        {this.state.skills.map((skill: Skill, index) => (
+        <div>
+          <input type="text" />
+        </div>
+
+        <div id="form__skillBox">
+          {skills.map((skill: Skill, index) => (
+            <button
+              className={
+                skill.checked
+                  ? "btn btn-primary m-1"
+                  : "btn btn-outline-primary m-1"
+              }
+              onClick={() => toggleSelectedSkill(index)}
+            >
+              {skill.name}
+            </button>
+          ))}
+        </div>
+
+        <div>
           <button
-            className={
-              skill.checked
-                ? "btn btn-primary m-2"
-                : "btn btn-outline-primary m-2"
-            }
-            onClick={() => this.toggleSelectedSkill(index)}
+            className="btn btn-dark m-2"
+            onClick={() => clearSelectedSkills()}
           >
-            {skill.name}
+            Clear
           </button>
-        ))}
+          <button className="btn btn-dark m-2">Submit</button>
+        </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Form;
